@@ -1,0 +1,54 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40%;
+  margin-right: 1em;
+}
+
+.heading {
+  font-family: 'Merriweather', serif;
+  margin-top: 1em;
+}
+
+.detailsList {
+  list-style: none;
+  margin-top: 2em;
+  font-size: 0.9rem;
+}
+
+.detailItem:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.detailContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.label {
+  font-weight: bold;
+}
+
+.btnContainer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+@media only screen and (min-width: 800px) {
+  .logo {
+    width: 30%;
+    margin-right: 1em;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .detailContainer {
+    font-size: 1.1rem;
+  }
+}

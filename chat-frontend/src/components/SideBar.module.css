@@ -1,0 +1,35 @@
+.sidebar {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0.15)
+  );
+  width: 30%;
+  height: 85vh;
+  border-radius: 1em;
+  position: fixed;
+  top: 8vh;
+  right: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 1em;
+}
+
+.logo {
+  width: 90%;
+}
+
+.list {
+  margin-top: 2em;
+  list-style: none;
+}
+
+.userImage {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 5px solid var(--color-white);
+  box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}

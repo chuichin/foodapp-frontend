@@ -1,0 +1,52 @@
+.inputContainer {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  background-color: var(--color-primary);
+  padding: 0.3em 0.6em;
+  font-size: 0.9rem;
+  color: var(--color-white);
+  border-radius: 0.3em 0 0 0.3em;
+  text-transform: capitalize;
+  flex: 0.25;
+}
+
+.inputField {
+  outline: none;
+  padding: 0.325em 0.5em;
+  border: 1px solid var(--color-primary);
+  border-left: none;
+  border-radius: 0 0.3em 0.3em 0;
+  flex: 0.75;
+  transition: background-color 0.4s;
+}
+
+.inputField:focus {
+  background-color: var(--color-secondary);
+}
+
+.inputField:focus .label {
+  background-color: var(--color-pink);
+}
+
+@media only screen and (min-width: 600px) {
+  .label {
+    flex: 0.15;
+  }
+
+  .inputField {
+    flex: 0.85;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .label {
+    font-size: 1.2rem;
+  }
+
+  .inputField {
+    font-size: 1.1rem;
+  }
+}

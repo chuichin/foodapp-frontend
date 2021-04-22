@@ -1,0 +1,114 @@
+.imageContainer {
+  position: relative;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.imageContainer::before {
+  content: '';
+  width: 35vw;
+  height: 35vw;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.logo {
+  width: 50%;
+}
+
+.heading {
+  margin-top: 2em;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+}
+
+.radioBtnContainer {
+  margin-top: 2em;
+}
+
+.radioBtnHeading {
+  margin-bottom: 1.5em;
+  color: var(--color-primary);
+}
+
+.radioBtnList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.radioBtnItem:not(:last-child) {
+  margin-right: 1em;
+}
+
+.radioBtn {
+  opacity: 0;
+  position: absolute;
+  z-index: -1000;
+}
+
+.radioLabel {
+  border: 1px solid var(--color-primary);
+  padding: 0.5em 1.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  color: var(--color-primary);
+  transition: 0.4s;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.radioLabel:hover,
+.radioLabel.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.loginList {
+  list-style: none;
+  margin-top: 2em;
+}
+
+.loginItem:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.btnContainer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+@media only screen and (min-width: 800px) {
+  .radioBtnHeading {
+    font-size: 1.2rem;
+  }
+
+  .radioLabel {
+    font-size: 1.2rem;
+    padding: 1em 2em;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .imageContainer::before {
+    width: 22vw;
+    height: 22vw;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .logo {
+    width: 40%;
+  }
+
+  .imageContainer::before {
+    width: 16vw;
+    height: 16vw;
+  }
+}

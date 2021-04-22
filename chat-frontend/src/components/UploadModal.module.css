@@ -1,0 +1,144 @@
+.overlay {
+  display: none;
+}
+
+.overlay.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: var(--color-white);
+  width: 95vw;
+  height: 70vh;
+  padding: 2em;
+  border-radius: 1em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.btnClose {
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btnClose:hover {
+  transform: scale(1.2);
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1000;
+  opacity: 0;
+}
+
+.btnLabel {
+  border: 1px solid var(--color-pink);
+  padding: 0.3em 1em;
+  border-radius: 0.4em;
+  color: var(--color-pink);
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right: 1.5em;
+  font-size: 0.8rem;
+}
+
+.btnLabel:hover {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.btnUpload {
+  border: 1px solid var(--color-pink);
+  background-color: transparent;
+  color: var(--color-pink);
+  padding: 0.3em 1em;
+  font-size: 1rem;
+  border-radius: 0.4em;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.4s;
+}
+
+.btnUpload:hover {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.photoContainer {
+  border: 2px dashed var(--color-pink);
+  padding: 1em;
+  border-radius: 1em;
+  position: relative;
+  min-height: 75%;
+  max-height: 75%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.previewText {
+  color: var(--color-pink);
+}
+
+@media only screen and (min-width: 600px) {
+  .modal {
+    width: 80vw;
+  }
+
+  .btnLabel {
+    font-size: 1rem;
+  }
+
+  .btnUpload {
+    font-size: 1rem;
+  }
+
+  .previewText {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .modal {
+    width: 70vw;
+    height: 75vh;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .modal {
+    width: 60vw;
+    height: 75vh;
+  }
+}

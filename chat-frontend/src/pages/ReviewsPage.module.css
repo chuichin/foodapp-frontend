@@ -1,0 +1,13 @@
+.heading {
+  font-family: 'Merriweather', serif;
+  font-size: 2rem;
+}
+
+.reviewsList {
+  list-style: none;
+  margin-top: 3em;
+}
+
+.reviewItem:not(:last-child) {
+  margin-bottom: 1.5em;
+}

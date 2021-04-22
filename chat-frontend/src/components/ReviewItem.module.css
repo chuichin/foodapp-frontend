@@ -1,0 +1,46 @@
+.cardContainer {
+  padding: 1em;
+  text-align: left;
+  border-radius: 1em;
+  box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 2fr 4fr 4fr;
+  grid-gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+.userImage {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.date {
+  color: var(--color-gray);
+  font-size: 0.8rem;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.review {
+  font-size: 0.9rem;
+}
