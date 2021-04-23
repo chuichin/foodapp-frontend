@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import SearchPage from '../pages/SearchPage';
@@ -24,6 +24,19 @@ import classes from './App.module.css';
 import TestPage from '../pages/TestPage';
 
 function App() {
+  window.OneSignal = window.OneSignal || [];
+  const OneSignal = window.OneSignal;
+  useEffect(() => {
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "61d46945-9409-40ea-ad2e-318848f4a5bf",
+        notifyButton: {
+          enable: true,
+        },
+        allowLocalhostAsSecureOrigin: true,
+      });
+    });
+  },[])
   return (
     <div className={classes.pageContainer}>
       <div className={classes.contentContainer}>
