@@ -15,12 +15,13 @@ const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(reduxThunk))
 );
-
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-);
+document.addEventListener("DOMContentLoaded", () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+  );
+})
