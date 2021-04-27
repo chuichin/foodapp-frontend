@@ -22,6 +22,7 @@ import UploadModal from './UploadModal';
 import ReviewsPage from '../pages/ReviewsPage';
 import classes from './App.module.css';
 import TestPage from '../pages/TestPage';
+import BrainTree from "./Braintree";
 
 function App() {
   window.OneSignal = window.OneSignal || [];
@@ -55,6 +56,7 @@ function App() {
           <Route path="/chefs/:id" component={ChefDetailPage} />
           <Route path="/proposals/:id" component={ProposalDetailsPage} />
           <Route path="/proposals" component={ProposalsPage} />
+          <Route path="/braintree" component={BrainTree}/>
           <Route path="/chats/:receiverEmail" component={SingleChatPage} />
           <Route path="/chats" component={ChatsPage} />
           <Route path="/reviews/:id" component={ReviewsPage} />
