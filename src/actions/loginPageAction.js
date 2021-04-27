@@ -20,23 +20,25 @@ export const postLoginData = (
     let url;
 
     if (accountType === 'user') {
-      url = `http://localhost:7000/api/v1/users/login`;
+      url = `https://foodapp2021.herokuapp.com/api/v1/users/login`;
     } else {
-      url = 'http://localhost:7000/api/v1/chefs/login';
+      url = 'https://foodapp2021.herokuapp.com/api/v1/chefs/login';
     }
 
     const response = await axios.post(url, formValues);
 
+    console.log(response.data);
+
     //set the relevant info into local storage
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('token', response.data.auth_token);
     localStorage.setItem('accountType', accountType);
     dispatch({ type: 'SIGNED_IN' });
 
     if (accountType === 'user') {
       localStorage.setItem('email', response.data.user.email);
     } else {
-      localStorage.setItem('email', response.data.chef.email);
-      localStorage.setItem('chefId', response.data.chef._id);
+      localStorage.setItem('email', response.data.user.email);
+      localStorage.setItem('chefId', response.data.user.id);
     }
 
     //navigate to the user's account page

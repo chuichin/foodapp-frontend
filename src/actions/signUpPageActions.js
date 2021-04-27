@@ -19,27 +19,30 @@ export const postSignUpData = (
     let url;
 
     if (accountType === 'user') {
-      url = 'http://localhost:7000/api/v1/users';
+      url = 'https://foodapp2021.herokuapp.com/api/v1/users/new';
     } else {
-      url = 'http://localhost:7000/api/v1/chefs';
+      url = 'https://foodapp2021.herokuapp.com/api/v1/chefs/new';
     }
 
+    const form = { ...formValues };
+    form.profileImage = `https://pc-food-bucket.s3.ap-southeast-1.amazonaws.com/1619099339372`;
+
     //sign up user
-    const response = await axios.post(url, formValues);
+    const response = await axios.post(url, form);
 
     //save to localStorage
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('token', response.data[0].auth_token);
     localStorage.setItem('accountType', accountType);
 
     dispatch({ type: 'SIGNED_IN' });
 
     if (accountType === 'user') {
-      localStorage.setItem('email', response.data.user.email);
+      localStorage.setItem('email', response.data[0].user.email);
       history.push('/me');
     } else {
-      localStorage.setItem('email', response.data.chef.email);
-      localStorage.setItem('chefId', response.data.chef._id);
-      history.push(`/signup/categories/${response.data.chef._id}`);
+      localStorage.setItem('email', response.data[0].user.email);
+      localStorage.setItem('chefId', response.data[0].user.id);
+      history.push(`/signup/categories/${response.data[0].user.id}`);
     }
 
     //stop page loading

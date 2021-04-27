@@ -12,42 +12,50 @@ export const fetchSearchData = term => async dispatch => {
     //start loading
     dispatch({ type: 'START_SEARCH_PAGE_CARD_LOADING' });
 
+    //prevent internal server error
+    if (!term) {
+      return;
+    }
+
     //fetch data
-    const response = await axios.get(
-      `http://localhost:7000/api/v1/categories/search/${term}`
+    const chefIdResponse = await axios.get(
+      `https://foodapp2021.herokuapp.com/api/v1/food_categories?category=${term}`
     );
 
-    const chefs = response.data.chefs;
-
-    const chefsPromises = chefs.map(chef =>
-      axios.get(`http://localhost:7000/api/v1/chefs/${chef.chef}`)
+    const chefsPromise = chefIdResponse.data.map(chef =>
+      axios.get(
+        `https://foodapp2021.herokuapp.com/api/v1/chefs/${chef.chef_id}`
+      )
     );
 
-    const chefsResponse = await Promise.all(chefsPromises);
+    const chefsResponse = await Promise.all(chefsPromise);
 
-    const chefsData = chefsResponse.map(res => res.data.chef);
-
-    const promises = chefsData.map(chef =>
-      axios.get(`http://localhost:7000/api/v1/categories/${chef._id}`)
+    const chefs = chefsResponse.map(
+      res => res.data.chef_profile || res.data.chef_id
     );
 
-    const likePromises = chefsData.map(chef =>
-      axios.get(`http://localhost:7000/api/v1/chefs/like/${chef._id}`)
+    const categoriesPromises = chefs.map(chef =>
+      axios.get(
+        `https://foodapp2021.herokuapp.com/api/v1/food_categories/${chef._id}`
+      )
     );
 
-    const categoriesResponse = await Promise.all(promises);
+    const likePromises = chefs.map(chef =>
+      axios.get(`https://foodapp2021.herokuapp.com/api/v1/likes/${chef._id}`)
+    );
 
-    const likesResponse = await Promise.all(likePromises);
+    const categoriesRes = await Promise.all(categoriesPromises);
+    const likesRes = await Promise.all(likePromises);
 
-    const categoriesData = categoriesResponse.map(res => res.data.categories);
-    const likesData = likesResponse.map(res => res.data.likes);
+    const categoriesData = categoriesRes.map(res => res.data.food_category);
+    const likesData = likesRes.map(res => res.data.no_of_likes);
 
-    chefsData.forEach((chef, index) => {
+    chefs.forEach((chef, index) => {
       chef.categories = categoriesData[index];
       chef.likes = likesData[index];
     });
 
-    dispatch({ type: 'SET_SEARCH_PAGE_CHEF_CARDS', payload: chefsData });
+    dispatch({ type: 'SET_SEARCH_PAGE_CHEF_CARDS', payload: chefs });
 
     //stop loading
     dispatch({ type: 'STOP_SEARCH_PAGE_CARD_LOADING' });

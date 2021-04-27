@@ -47,7 +47,7 @@ const AccountPage = props => {
       <div className={classes.imageContainer}>
         <img
           src={props.accountPage.activeAccount.profileImage}
-          alt={props.accountPage.activeAccount.username}
+          alt={props.accountPage.activeAccount.name}
           className={classes.profileImage}
         />
 
@@ -66,7 +66,7 @@ const AccountPage = props => {
         <ul className={classes.detailsList}>
           <li className={classes.detailItem}>
             <Field
-              name="username"
+              name="name"
               component={UpdateTextInput}
               label="name"
               inputType="text"
@@ -101,7 +101,7 @@ const form = reduxForm({
 const mapStateToProps = state => {
   return {
     initialValues: {
-      username: state.accountPage.activeAccount.username,
+      name: state.accountPage.activeAccount.name,
       email: state.accountPage.activeAccount.email,
     },
     ui: state.ui,

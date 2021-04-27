@@ -36,10 +36,6 @@ export const fetchInitialData = () => async dispatch => {
     const categoriesData = categoriesRes.map(res => res.data.food_category);
     const likesData = likesRes.map(res => res.data.no_of_likes);
 
-    console.log(categoriesData);
-    console.log(likesData);
-    console.log(chefs);
-
     chefs.forEach((chef, index) => {
       chef.categories = categoriesData[index];
       chef.likes = likesData[index];
@@ -51,7 +47,7 @@ export const fetchInitialData = () => async dispatch => {
     //stop loading
     dispatch({ type: 'STOP_PAGE_LOADING' });
   } catch (err) {
-    console.log(err);
+    //stop loading
     dispatch({ type: 'STOP_CARDS_LOADING' });
 
     //notify the user of the error
@@ -78,41 +74,47 @@ export const onCategoryBtnClick = category => async dispatch => {
 
     if (category === 'recommended') {
       const response = await axios.get(
-        `http://localhost:7000/api/v1/chefs?sort=-ratingAverage`
+        `https://foodapp2021.herokuapp.com/api/v1/chefs/`
       );
 
-      chefs = [...response.data.chefs];
+      chefs = [...response.data.results];
     } else {
       const chefIdResponse = await axios.get(
-        `http://localhost:7000/api/v1/categories/search/${category}`
+        `https://foodapp2021.herokuapp.com/api/v1/food_categories?category=${category}`
       );
 
-      const chefsPromise = chefIdResponse.data.chefs.map(chef =>
-        axios.get(`http://localhost:7000/api/v1/chefs/${chef.chef}`)
+      const chefsPromise = chefIdResponse.data.map(chef =>
+        axios.get(
+          `https://foodapp2021.herokuapp.com/api/v1/chefs/${chef.chef_id}`
+        )
       );
 
       const chefsResponse = await Promise.all(chefsPromise);
 
-      chefs = chefsResponse.map(res => res.data.chef);
+      chefs = chefsResponse.map(
+        res => res.data.chef_profile || res.data.chef_id
+      );
     }
 
-    const promises = chefs.map(chef =>
-      axios.get(`http://localhost:7000/api/v1/categories/${chef._id}`)
+    const categoriesPromises = chefs.map(chef =>
+      axios.get(
+        `https://foodapp2021.herokuapp.com/api/v1/food_categories/${chef._id}`
+      )
     );
 
     const likePromises = chefs.map(chef =>
-      axios.get(`http://localhost:7000/api/v1/chefs/like/${chef._id}`)
+      axios.get(`https://foodapp2021.herokuapp.com/api/v1/likes/${chef._id}`)
     );
 
-    const responses = await Promise.all(promises);
-    const likeResponses = await Promise.all(likePromises);
+    const categoriesRes = await Promise.all(categoriesPromises);
+    const likesRes = await Promise.all(likePromises);
 
-    const categoryData = responses.map(res => res.data.categories);
-    const likeData = likeResponses.map(res => res.data.likes);
+    const categoriesData = categoriesRes.map(res => res.data.food_category);
+    const likesData = likesRes.map(res => res.data.no_of_likes);
 
     chefs.forEach((chef, index) => {
-      chef.categories = categoryData[index];
-      chef.likes = likeData[index];
+      chef.categories = categoriesData[index];
+      chef.likes = likesData[index];
     });
 
     dispatch({ type: 'FETCH_HOMEPAGE_CHEFS', payload: chefs });
