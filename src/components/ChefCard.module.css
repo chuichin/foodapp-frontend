@@ -35,13 +35,25 @@
 
 .name {
   font-weight: bold;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.6em;
   font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.categoriesList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.categoryItem:not(:last-child) {
+  margin-right: 0.5em;
 }
 
 .category {
   color: var(--color-gray);
   margin-bottom: 0.8em;
+  text-transform: capitalize;
 }
 
 .price {
@@ -52,6 +64,13 @@
 .heartContainer {
   display: flex;
   flex: 0.1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.likeNumber {
+  font-size: 0.7rem;
+  margin-top: 0.5em;
 }
 
 @media only screen and (min-width: 300px) {

@@ -1,0 +1,18 @@
+.header {
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Merriweather', serif;
+  font-size: 2rem;
+}
+
+.reviewsList {
+  list-style: none;
+}
+
+.reviewItem:not(:last-child) {
+  margin-bottom: 1em;
+}

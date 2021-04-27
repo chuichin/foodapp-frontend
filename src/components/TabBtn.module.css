@@ -33,3 +33,11 @@
 .btnTab:hover {
   color: var(--color-pink);
 }
+
+.btnTab.active {
+  color: var(--color-pink);
+}
+
+.btnTab.active::after {
+  transform: scaleX(1);
+}

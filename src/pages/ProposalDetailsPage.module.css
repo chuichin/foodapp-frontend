@@ -1,0 +1,83 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40%;
+  margin-right: 1em;
+}
+
+.heading {
+  font-family: 'Merriweather', serif;
+  margin-top: 1em;
+}
+
+.detailsList {
+  list-style: none;
+  margin-top: 2em;
+  font-size: 0.9rem;
+}
+
+.detailItem:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.detailContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.label {
+  font-weight: bold;
+}
+
+.btnContainer {
+  text-align: center;
+  margin-top: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.btnItem:not(:last-child) {
+  margin-right: 1em;
+}
+
+.btnBack {
+  border: none;
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1.5rem;
+  outline: none;
+  margin-top: 1rem;
+}
+
+.btnBack:hover {
+  transform: scale(1.3);
+}
+
+@media only screen and (min-width: 800px) {
+  .logo {
+    width: 30%;
+    margin-right: 1em;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .detailContainer {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .btnBack {
+    font-size: 0.9rem;
+  }
+}

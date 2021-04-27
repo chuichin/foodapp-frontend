@@ -2,6 +2,11 @@
   font-size: 1.8rem;
   font-family: 'Merriweather', serif;
   margin-bottom: 1em;
+  text-transform: capitalize;
+}
+
+.searchForm {
+  position: relative;
 }
 
 .filterContainer {
@@ -21,6 +26,7 @@
   justify-content: center;
   cursor: pointer;
   transition: 0.4s;
+  outline: none;
 }
 
 .btnFilter:hover {
@@ -44,6 +50,10 @@
   border-radius: 0.3em;
   cursor: pointer;
   transition: 0.4s;
+  outline: none;
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: var(--color-black);
 }
 
 .btnFilter:hover,
@@ -60,12 +70,20 @@
   margin-right: 0.5em;
 }
 
+.loaderContainer {
+  margin-top: 3em;
+}
+
 .cardsContainer {
   list-style: none;
   margin-top: 2em;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 1em;
+}
+
+.noResults {
+  text-align: center;
 }
 
 @media only screen and (min-width: 300px) {

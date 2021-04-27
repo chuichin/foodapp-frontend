@@ -25,6 +25,15 @@
   font-size: 0.7rem;
   cursor: pointer;
   transition: 0.4s;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.btnUpdate.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .btnUpdate:hover {
@@ -42,15 +51,31 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1em;
+  border: 5px solid var(--color-white);
+  box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.2);
 }
 
 .name {
   margin-bottom: 0.5em;
+  text-transform: capitalize;
+}
+
+.categoriesList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.categoryItem:not(:last-child) {
+  margin-right: 1em;
 }
 
 .categories {
   margin-bottom: 1em;
   color: var(--color-gray);
+  text-transform: capitalize;
 }
 
 .ratingContainer {
@@ -67,35 +92,55 @@
   justify-content: center;
 }
 
-.foodImageContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.reviewsContainer {
+  list-style: none;
   margin-top: 3em;
 }
 
-.foodImageContainer::after {
-  content: '';
-  height: 80%;
-  background-color: var(--color-secondary);
-  position: absolute;
-  top: 50%;
-  left: -20px;
-  right: -20px;
-  transform: translateY(-50%);
-  z-index: -1;
-  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
-}
-
-.foodImage {
-  width: 8em;
-  height: 8em;
-  border-radius: 50%;
-  object-fit: cover;
+.reviewItem:not(:last-child) {
   margin-bottom: 1.5em;
 }
 
-.description {
-  font-size: 0.9rem;
+.calendarContainer {
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendarHeading {
+  font-family: 'Merriweather', serif;
+  margin-bottom: 1em;
+  font-size: 1.8rem;
+}
+
+.proposalHeading {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 1.2rem;
+}
+
+.calendarActiveTiles {
+  background-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+}
+
+@media only screen and (min-width: 800px) {
+  .btnUpdate {
+    font-size: 0.9rem;
+  }
+
+  .btnUpdateContainer::before {
+    height: 18rem;
+  }
+
+  .chefImage {
+    width: 13em;
+    height: 13em;
+  }
+
+  .proposalHeading {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
 }

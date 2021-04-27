@@ -1,51 +1,188 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import Calendar from 'react-calendar';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+  fetchChefData,
+  onTabBtnClick,
+  onBtnSelectChange,
+} from '../actions/chefDetailPageActions';
 import PageContainer from '../containers/PageContainer';
+import ChefDescriptionItem from '../components/ChefDescriptionItem';
 import Rating from '../components/Rating';
 import TabBtn from '../components/TabBtn';
+import ReviewItem from '../components/ReviewItem';
+import OrangeBtn from '../components/OrangeBtn';
+import SelectBtn from '../components/SelectBtn';
+import PageLoader from '../components/PageLoader';
+import ChefCardLoader from '../components/ChefCardLoader';
 import classes from './ChefDetailPage.module.css';
-import chef1 from '../images/chef1.jpg';
-import food1 from '../images/food1.jpg';
-import food2 from '../images/food2.jpg';
-import food3 from '../images/food3.jpg';
+import 'react-calendar/dist/Calendar.css';
 
 const tabs = [{ text: 'description' }, { text: 'reviews' }];
 
-const ChefDetailPage = () => {
+const ChefDetailPage = props => {
+  const { id } = props.match.params;
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  //fetching initial chef data when it first renders
+  useEffect(() => {
+    const accountType = localStorage.getItem('accountType');
+
+    if (accountType) {
+      dispatch({ type: 'SET_ACCOUNT_TYPE', payload: accountType });
+    }
+
+    dispatch(fetchChefData(id, history));
+  }, []);
+
+  const chefDetailPage = useSelector(state => state.chefDetailPage);
+
+  const ui = useSelector(state => state.ui);
+
+  const active = ui.accountType === 'chef' ? classes.active : null;
+
+  //render reviews
+  const renderReviews = () => {
+    //displaying loader when the fetching reviews
+    if (chefDetailPage.isReviewsLoading) {
+      return <ChefCardLoader />;
+    }
+
+    //displaying no reviews text when there is no review
+    if (chefDetailPage.reviews.length === 0) {
+      return (
+        <li>
+          <p>No reviews for the current chef yet.</p>
+        </li>
+      );
+    }
+
+    //display the reviews and button
+    return (
+      <>
+        {chefDetailPage.reviews.map(review => (
+          <li className={classes.reviewItem} key={review._id}>
+            <ReviewItem review={review} />
+          </li>
+        ))}
+        <li>
+          <OrangeBtn path={`/chefs/${id}/reviews`} text="See All Reviews" />
+        </li>
+      </>
+    );
+  };
+
+  //setting the styling for the confirmed dates on the calendar
+  const setActiveTileClass = date => {
+    let activeClass;
+
+    chefDetailPage.chef.confirmedDates?.forEach(confirmedDate => {
+      if (
+        date.date.getDate() === confirmedDate.getDate() &&
+        date.date.getMonth() === confirmedDate.getMonth() &&
+        date.date.getYear() === confirmedDate.getYear()
+      ) {
+        activeClass = classes.calendarActiveTiles;
+      }
+    });
+
+    return activeClass;
+  };
+
+  //will return a loader when the page is fetching data
+  if (ui.isPageLoading) {
+    return <PageLoader />;
+  }
+
+  //after loading, render the component
   return (
     <PageContainer>
       <div className={classes.btnUpdateContainer}>
-        <button className={classes.btnUpdate}>Update Page</button>
+        <Link
+          to={`/chefs/update/${id}`}
+          className={`${classes.btnUpdate} ${active}`}
+        >
+          Update Page
+        </Link>
       </div>
 
       <div className={classes.contentContainer}>
-        <img src={chef1} alt="Mike" className={classes.chefImage} />
-        <h2 className={classes.name}>Mike</h2>
-        <h4 className={classes.categories}>Western</h4>
+        <img
+          src={chefDetailPage.chef.profileImage}
+          alt={chefDetailPage.chef.username}
+          className={classes.chefImage}
+        />
+        <h2 className={classes.name}>{chefDetailPage.chef.username}</h2>
+
+        <ul className={classes.categoriesList}>
+          {chefDetailPage.chef.categories?.map((category, index) => {
+            return (
+              <li className={classes.categoryItem} key={index}>
+                <h4 className={classes.categories}>{category}</h4>
+              </li>
+            );
+          })}
+        </ul>
 
         <div className={classes.ratingContainer}>
-          <Rating />
+          <Rating rating={chefDetailPage.chef.ratingAverage} />
         </div>
 
         <ul className={classes.tabsContainer}>
           {tabs.map((tab, index) => (
-            <TabBtn key={index} {...tab} />
+            <TabBtn
+              key={index}
+              {...tab}
+              activeSection={chefDetailPage.activeSection}
+              onClick={() => dispatch(onTabBtnClick(tab.text, id))}
+            />
           ))}
+
+          {chefDetailPage.activeSection === 'description' ? (
+            <li>
+              <SelectBtn
+                menus={chefDetailPage.menus}
+                onChange={onBtnSelectChange}
+              />
+            </li>
+          ) : (
+            ''
+          )}
         </ul>
 
-        <div className={classes.foodImageContainer}>
-          <img src={food1} alt="food1" className={classes.foodImage} />
-          <img src={food2} alt="food2" className={classes.foodImage} />
-          <img src={food3} alt="food3" className={classes.foodImage} />
+        {chefDetailPage.activeSection === 'reviews' ? (
+          <ul className={classes.reviewsContainer}>{renderReviews()}</ul>
+        ) : (
+          ''
+        )}
+
+        {chefDetailPage.activeSection === 'description' ? (
+          <ChefDescriptionItem {...chefDetailPage.activeMenu} />
+        ) : (
+          ''
+        )}
+
+        <div className={classes.calendarContainer}>
+          <h3 className={classes.calendarHeading}>Calendar</h3>
+          <Calendar tileClassName={setActiveTileClass} />
         </div>
 
-        <p className={classes.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          posuere dui facilisis massa vehicula rutrum. Sed id malesuada orci.
-          Duis ac dolor ultricies turpis consequat pulvinar. Nullam odio ante,
-          semper sed nunc egestas, tincidunt venenatis libero. Curabitur semper
-          sem vel augue hendrerit congue. Ut augue nunc, pharetra nec mattis at,
-          consectetur sit amet nisl.
-        </p>
+        <div className={classes.proposalContainer}>
+          <p className={classes.proposalHeading}>
+            Make sure to send a proposal three days before.
+          </p>
+
+          {ui.accountType === 'chef' ? (
+            <OrangeBtn path={`/proposals`} text="Go to my proposal requests" />
+          ) : (
+            <OrangeBtn path={`/chefs/${id}/proposal`} text="Send proposal" />
+          )}
+        </div>
       </div>
     </PageContainer>
   );

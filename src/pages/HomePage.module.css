@@ -14,6 +14,7 @@
 .heading {
   font-family: 'Merriweather', serif;
   margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 .categories {
@@ -32,6 +33,10 @@
   font-size: 1.3rem;
 }
 
+.searchForm {
+  position: relative;
+}
+
 .cardContainer {
   display: grid;
   grid-template-columns: 1fr;
@@ -46,15 +51,20 @@
 .contentHeading {
   font-family: 'Merriweather', serif;
   font-size: 1.3rem;
+  text-transform: capitalize;
+  margin-bottom: 2em;
 }
 
 .chefCardContainer {
-  margin-top: 2em;
   display: grid;
   grid-template-columns: 1fr;
   list-style: none;
   grid-gap: 1em;
   margin-bottom: 3em;
+}
+
+.noResults {
+  text-align: center;
 }
 
 @media only screen and (min-width: 250px) {

@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reducers from './reducers';
 import App from './components/App';
 import './index.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

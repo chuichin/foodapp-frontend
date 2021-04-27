@@ -1,0 +1,32 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15em;
+}
+
+.loaderContainer {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderItem {
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.loaderItem:not(:last-child) {
+  margin-right: 0.4em;
+}
+
+@media only screen and (min-width: 800px) {
+  .loaderItem {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

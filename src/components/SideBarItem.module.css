@@ -6,7 +6,7 @@
 }
 
 .listItem:hover {
-  transform: scale(1.2);
+  transform: translateX(20px);
 }
 
 .listItem:not(:last-child) {

@@ -1,0 +1,41 @@
+.heading {
+  font-family: 'Merriweather', serif;
+}
+
+.title {
+  font-size: 0.9rem;
+  margin: 2em 0;
+}
+
+.categoriesList {
+  list-style: none;
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em;
+}
+
+.errorMsg {
+  margin-top: 2em;
+  text-align: center;
+  color: var(--color-red);
+}
+
+.btnContainer {
+  text-align: center;
+  margin: 3em 0 2em;
+}
+
+@media only screen and (min-width: 700px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .errorMsg {
+    font-size: 1.2rem;
+  }
+}

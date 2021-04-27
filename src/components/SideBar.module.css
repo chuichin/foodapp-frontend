@@ -24,3 +24,12 @@
   margin-top: 2em;
   list-style: none;
 }
+
+.userImage {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 5px solid var(--color-white);
+  box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}

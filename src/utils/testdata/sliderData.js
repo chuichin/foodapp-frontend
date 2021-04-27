@@ -11,12 +11,12 @@ import icon10 from '../../images/foodIcons/icon10.png';
 
 const sliderData = [
   { category: 'recommended', icon: icon4 },
-  { category: 'western', icon: icon8 },
-  { category: 'malaysian', icon: icon6 },
+  { category: 'american', icon: icon8 },
+  { category: 'malay', icon: icon6 },
   { category: 'chinese', icon: icon2 },
   { category: 'japanese', icon: icon10 },
   { category: 'korean', icon: icon3 },
-  { category: 'mexican', icon: icon1 },
+  { category: 'spanish', icon: icon1 },
   { category: 'italian', icon: icon5 },
   { category: 'thai', icon: icon9 },
   { category: 'indian', icon: icon7 },

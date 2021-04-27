@@ -1,0 +1,30 @@
+.heading {
+  font-family: 'Merriweather', serif;
+  margin-top: 1em;
+}
+
+.categoryList {
+  list-style: none;
+  margin-top: 2em;
+}
+
+.categoryItem {
+  border-bottom: 1px solid var(--color-light-gray);
+  position: relative;
+  border-radius: 0.5em;
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: var(--color-gray);
+  display: block;
+  width: 100%;
+  padding: 2em 2em 1em;
+  transition: 0.5s;
+}
+
+.link:hover {
+  background-color: var(--color-secondary);
+}

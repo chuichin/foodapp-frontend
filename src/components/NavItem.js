@@ -14,14 +14,26 @@ const item = {
   },
 };
 
-const NavItem = ({ text, icon, path }) => {
+const NavItem = ({ text, icon, path, onClick, chefId }) => {
+  const setPath = path => {
+    let currentPath;
+
+    if (text === 'My Page') {
+      currentPath = `/chefs/${chefId}`;
+    } else {
+      currentPath = path;
+    }
+
+    return currentPath;
+  };
+
   return (
     <motion.li
       className={classes.navItem}
       variants={item}
       whileHover={{ x: 10 }}
     >
-      <Link to={path} className={classes.link}>
+      <Link to={setPath(path)} className={classes.link} onClick={onClick}>
         <span className={classes.itemLogo}>{icon}</span>
         {text}
       </Link>

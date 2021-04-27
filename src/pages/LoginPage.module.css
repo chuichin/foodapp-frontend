@@ -1,0 +1,82 @@
+.imageContainer {
+  position: relative;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.imageContainer::before {
+  content: '';
+  width: 35vw;
+  height: 35vw;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.logo {
+  width: 50%;
+}
+
+.radioBtnContainer {
+  margin-top: 1.5em;
+}
+
+.radioHeading {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5em;
+}
+
+.radioList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  margin-top: 2em;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+}
+
+.loginList {
+  list-style: none;
+  margin-top: 1em;
+}
+
+.loginItem:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.btnContainer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+@media only screen and (min-width: 800px) {
+  .radioHeading {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .imageContainer::before {
+    width: 22vw;
+    height: 22vw;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .logo {
+    width: 40%;
+  }
+
+  .imageContainer::before {
+    width: 16vw;
+    height: 16vw;
+  }
+}

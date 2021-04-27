@@ -13,6 +13,11 @@
   text-transform: capitalize;
 }
 
+.card.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
 .card:hover {
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -35,7 +40,8 @@
   color: var(--color-white);
 }
 
-.card:hover .arrowIcon {
+.card:hover .arrowIcon,
+.card.active .arrowIcon {
   background-color: var(--color-white);
   color: var(--color-primary);
 }

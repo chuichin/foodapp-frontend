@@ -1,0 +1,148 @@
+.header {
+  position: relative;
+  text-align: center;
+}
+
+.logo {
+  width: 35%;
+}
+
+.headerHeading {
+  font-family: 'Merriweather', serif;
+  margin-bottom: 2em;
+}
+
+.questionList {
+  list-style: none;
+  margin-top: 2em;
+}
+
+.questionHeading {
+  margin-bottom: 1em;
+}
+
+.questionItem:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.optionList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.optionItem:not(:last-child) {
+  margin-right: 1em;
+}
+
+.optionItem {
+  margin-bottom: 1em;
+}
+
+.calendarContainer {
+  margin: 4em 0;
+}
+
+.calendarHeading {
+  font-family: 'Merriweather', serif;
+  margin-bottom: 1em;
+}
+
+.dateInput {
+  border: 1px solid var(--color-light-gray);
+  padding: 0.3em 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  outline: none;
+}
+
+.dateInput:focus {
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.dateInputContainer.errror .dateInput {
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+}
+
+.errorMsg {
+  color: var(--color-red);
+}
+
+.textareaContainer {
+  margin-top: 2em;
+}
+
+.textareaHeading {
+  font-family: 'Merriweather', serif;
+  margin-bottom: 1.5em;
+  font-size: 0.9rem;
+}
+
+.textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  padding: 0.8em 0.5em;
+  border-radius: 0.5em;
+}
+
+.detailsContainer {
+  margin: 4em 0 2em;
+}
+
+.detailHeading {
+  font-family: 'Merriweather', serif;
+  font-size: 0.9rem;
+  margin-bottom: 1.5em;
+}
+
+.inputList {
+  list-style: none;
+}
+
+.inputItem:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.btnContainer {
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+  .header {
+    display: flex;
+    align-items: flex-end;
+    text-align: left;
+    margin-bottom: 2em;
+  }
+
+  .btnContainer {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .questionHeading {
+    font-size: 1.4rem;
+  }
+
+  .textarea {
+    font-size: 1.1rem;
+  }
+
+  .textareaHeading {
+    font-size: 1.1rem;
+  }
+
+  .detailHeading {
+    font-size: 1.1rem;
+  }
+
+  .dateInput {
+    padding: 0.5em 2em;
+  }
+}

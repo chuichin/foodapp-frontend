@@ -47,20 +47,20 @@
   top: 0.4em;
 }
 
-.checkbox:checked + .label .line {
+.label.active .line {
   background-color: transparent;
 }
 
-.checkbox:checked + .label .line::before,
-.checkbox:checked + .label .line::after {
+.label.active .line::before,
+.label.active .line::after {
   top: 0;
 }
 
-.checkbox:checked + .label .line::before {
+.label.active .line::before {
   transform: rotate(45deg);
 }
 
-.checkbox:checked + .label .line::after {
+.label.active .line::after {
   transform: rotate(-45deg);
 }
 

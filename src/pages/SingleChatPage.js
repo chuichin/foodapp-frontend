@@ -13,7 +13,7 @@ import {
 import socket from '../utils/socket';
 import ChatMessage from '../components/ChatMessage';
 import classes from './SingleChatPage.module.css';
-import chef1 from '../images/chef1.jpg';
+import chef1 from '../images/food1.jpg';
 
 const SingleChatPage = props => {
   const { receiverEmail } = props.match.params;

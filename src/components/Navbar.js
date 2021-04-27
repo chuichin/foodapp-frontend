@@ -1,26 +1,14 @@
-import React from 'react';
-import {
-  FaUtensils,
-  FaGlassMartiniAlt,
-  FaQuestionCircle,
-  FaInfoCircle,
-  FaHeadset,
-  FaHome,
-} from 'react-icons/fa';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
-import { toggleNav } from '../actions';
+import {
+  notSignedInItems,
+  userSignedInItems,
+  chefSignedInItems,
+} from '../utils/navBarItemData';
 import NavItem from './NavItem';
 import classes from './Navbar.module.css';
-
-const navItems = [
-  { text: 'Home', icon: <FaHome />, path: '/' },
-  { text: 'Sign Up', icon: <FaUtensils />, path: '/signup' },
-  { text: 'Log In', icon: <FaGlassMartiniAlt />, path: '/login' },
-  { text: 'About Us', icon: <FaInfoCircle />, path: '/aboutus' },
-  { text: 'Support', icon: <FaHeadset />, path: '/support' },
-  { text: 'FAQ', icon: <FaQuestionCircle />, path: '/faq' },
-];
 
 const backgroundVariant = {
   open: {
@@ -32,7 +20,7 @@ const backgroundVariant = {
   close: {
     scale: 1,
     transition: {
-      duration: 1,
+      duration: 1.35,
     },
   },
 };
@@ -65,20 +53,112 @@ const navVariant = {
 };
 
 const Navbar = props => {
+  const ui = useSelector(state => state.ui);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const accountType = localStorage.getItem('accountType');
+    const chefId = localStorage.getItem('chefId');
+
+    if (token) {
+      dispatch({ type: 'SIGNED_IN' });
+    }
+
+    if (chefId) {
+      dispatch({ type: 'SET_CURRENT_CHEF_ID', payload: chefId });
+    }
+
+    if (accountType) {
+      dispatch({ type: 'SET_ACCOUNT_TYPE', payload: accountType });
+    }
+  }, []);
+
+  const onToggleNavClick = () => {
+    dispatch({ type: 'TOGGLE_NAV' });
+  };
+
+  const onNavItemClick = () => {
+    dispatch({ type: 'CLOSE_NAV' });
+  };
+
+  const onLogoutBtnClick = () => {
+    dispatch({ type: 'LOGGED_OUT' });
+    dispatch({ type: 'CLOSE_NAV' });
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('accountType');
+    localStorage.removeItem('chefId');
+
+    toast.success('You have successfully logged out', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const renderContent = () => {
+    if (!ui.isSignedIn) {
+      return (
+        <>
+          {notSignedInItems.map((item, index) => (
+            <NavItem {...item} key={index} onClick={onNavItemClick} />
+          ))}
+        </>
+      );
+    }
+
+    const content =
+      ui.accountType === 'user' ? userSignedInItems : chefSignedInItems;
+
+    return (
+      <>
+        {content.map((el, index) => {
+          if (el.text === 'Log Out') {
+            return (
+              <NavItem
+                {...el}
+                key={index}
+                onClick={onLogoutBtnClick}
+                chefId={ui.chefId}
+              />
+            );
+          }
+
+          return (
+            <NavItem
+              {...el}
+              key={index}
+              onClick={onNavItemClick}
+              chefId={ui.chefId}
+            />
+          );
+        })}
+      </>
+    );
+  };
+
+  const active = ui.isNavOpen ? classes.active : null;
+
   return (
     <div className={classes.navigation}>
       <input
         type="checkbox"
         id="nav-toggle"
         className={classes.checkbox}
-        onClick={props.toggleNav}
+        onClick={onToggleNavClick}
       />
-      <label htmlFor="nav-toggle" className={classes.label}>
+      <label htmlFor="nav-toggle" className={`${classes.label} ${active}`}>
         <span className={`${classes.line}`}></span>
       </label>
 
       <motion.div
-        animate={props.isNavOpen ? 'open' : 'close'}
+        animate={ui.isNavOpen ? 'open' : 'close'}
         variants={backgroundVariant}
         className={classes.navBackground}
       >
@@ -88,23 +168,15 @@ const Navbar = props => {
       <motion.nav
         className={classes.nav}
         variants={navVariant}
-        animate={props.isNavOpen ? 'open' : 'close'}
+        animate={ui.isNavOpen ? 'open' : 'close'}
         initial="close"
       >
         <motion.ul className={classes.navList} variants={navListVariant}>
-          {navItems.map((item, index) => (
-            <NavItem key={index} {...item} />
-          ))}
+          {renderContent()}
         </motion.ul>
       </motion.nav>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isNavOpen: state.ui.isNavOpen,
-  };
-};
-
-export default connect(mapStateToProps, { toggleNav })(Navbar);
+export default Navbar;

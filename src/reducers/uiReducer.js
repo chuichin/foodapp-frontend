@@ -1,24 +1,35 @@
 const initialState = {
   isNavOpen: false,
-  isLoading: false,
+  isPageLoading: false,
   isEmojiPickerOpen: false,
-  isError: false,
+  isSignedIn: false,
+  accountType: 'user',
+  uploadType: null,
+  chefId: null,
 };
 
 const uiReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_NAV':
       return { ...state, isNavOpen: !state.isNavOpen };
-    case 'START_LOADING':
-      return { ...state, isLoading: true };
-    case 'STOP_LOADING':
-      return { ...state, isLoading: false };
+    case 'CLOSE_NAV':
+      return { ...state, isNavOpen: false };
+    case 'START_PAGE_LOADING':
+      return { ...state, isPageLoading: true };
+    case 'STOP_PAGE_LOADING':
+      return { ...state, isPageLoading: false };
     case 'TOGGLE_EMOJI_PICKER':
       return { ...state, isEmojiPickerOpen: !state.isEmojiPickerOpen };
-    case 'SET_ERROR':
-      return { ...state, isError: true };
-    case 'HIDE_ERROR':
-      return { ...state, isError: false };
+    case 'SIGNED_IN':
+      return { ...state, isSignedIn: true };
+    case 'LOGGED_OUT':
+      return { ...state, isSignedIn: false };
+    case 'SET_ACCOUNT_TYPE':
+      return { ...state, accountType: action.payload };
+    case 'SET_UPLOAD_MODAL_TYPE':
+      return { ...state, uploadType: action.payload };
+    case 'SET_CURRENT_CHEF_ID':
+      return { ...state, chefId: action.payload };
     default:
       return state;
   }

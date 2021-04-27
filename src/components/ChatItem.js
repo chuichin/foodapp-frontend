@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import classes from './ChatItem.module.css';
-import chef1 from '../images/chef1.jpg';
+import chef1 from '../images/food1.jpg';
 
 const ChatItem = ({
   receiverName,

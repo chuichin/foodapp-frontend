@@ -1,0 +1,15 @@
+.backBtn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  margin-right: 2em;
+  cursor: pointer;
+  transition: 0.4s;
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  transform: scale(1.4);
+}

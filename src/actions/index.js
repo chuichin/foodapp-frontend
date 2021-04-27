@@ -1,10 +1,6 @@
 import axios from 'axios';
 import socket from '../utils/socket';
 
-export const toggleNav = () => {
-  return { type: 'TOGGLE_NAV' };
-};
-
 export const toggleEmojiPicker = () => {
   return { type: 'TOGGLE_EMOJI_PICKER' };
 };
